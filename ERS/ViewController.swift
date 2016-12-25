@@ -32,21 +32,34 @@ class ViewController: UIViewController, JHEgyptionDelegate {
         if !uCard.flipped {
             uCard.flipCard()
         }
-        let (card, _) = game.enactTurn()
-        updateCardUI(forCard: card)
-        //Start next [computer] turns
-        computerTurns(numberOfTurns: game.players.count - 1)
+        let (card, rWinner) = game.enactTurn()
+        if let rCard = card {
+            updateCardUI(forCard: rCard)
+            //Start next [computer] turns
+            computerTurns(numberOfTurns: game.players.count - 1)
+        }
+        if let sWinner = rWinner {
+            //Winner found
+            winner(player: sWinner)
+        }
     }
     
     func computerTurns(numberOfTurns: Int) {
         var xNumberOfTurns: Int = numberOfTurns
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            let (card, _) = self.game.enactTurn()
-            self.updateCardUI(forCard: card)
-            xNumberOfTurns -= 1
-            if xNumberOfTurns > 0 {
-                self.computerTurns(numberOfTurns: xNumberOfTurns)
+            let (card, rWinner) = self.game.enactTurn()
+            if let rCard = card {
+                self.updateCardUI(forCard: rCard)
+                xNumberOfTurns -= 1
+                if xNumberOfTurns > 0 {
+                    self.computerTurns(numberOfTurns: xNumberOfTurns)
+                }
             }
+            if let cWinner = rWinner {
+                //Winner found
+                self.winner(player: cWinner)
+            }
+            
         }
     }
     

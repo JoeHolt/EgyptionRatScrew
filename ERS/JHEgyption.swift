@@ -125,7 +125,7 @@ class JHEgyption: NSObject {
     }
     
     //Enact a turn, if turn results in winner, said winner is returned, the played card is also returned
-    func enactTurn() -> (JHCard, JHPlayer?) {
+    func enactTurn() -> (JHCard?, JHPlayer?) {
         if currentPlayer == 0 {
             delegate?.userTurnDidStart()
         }
@@ -147,7 +147,7 @@ class JHEgyption: NSObject {
             delegate?.userTurnWillBegin()
         }
         currentPlayer += 1
-        return (rCard!, winner)
+        return (rCard, winner)
     }
     
     //Game checks for a winner, returns player if there is winner, nil otherwise
