@@ -15,8 +15,11 @@ import UIKit
 
 class JHEgyption: NSObject {
     
+    static let specialValues: [String:Int] = ["A":3,"K":2,"Q":1,"J":0]
+    
     var pile: [JHCard] = []
     var players: [JHPlayer]! //Player 0 is always the user, others are computers
+    var specialCard: Int = 0 //Number of cards to play after a special card
     
     init(players: [JHPlayer], deck: JHDeck) {
         self.players = players
@@ -35,6 +38,10 @@ class JHEgyption: NSObject {
     //Play a card to the pile
     func playCard(card: JHCard) {
         pile.insert(card, at: 0)
+        if JHEgyption.specialValues.keys.contains(card.value) {
+            specialCard = JHEgyption.specialValues[card.value]!
+            print("\(card.content) played")
+        }
         if checkForDouble() {
             print("Two in a row slap possible: \(pile[0].content) and \(pile[1].content)")
         }

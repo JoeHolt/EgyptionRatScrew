@@ -16,6 +16,13 @@ class ViewController: UIViewController {
     
     var game: JHEgyption!
     var deck: JHDeck!
+    var currentPlayer: Int = 0 {
+        didSet {
+            if currentPlayer + 1 > game.players.count {
+                currentPlayer = 0
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +36,29 @@ class ViewController: UIViewController {
         if slapped {
             slappedUI()
         }
+        if game.players[0].deck.cards.count == 0 {
+            winner(player: game.players[0])
+        }
     }
     
     //Perform play action
     @IBAction func playTapped(_ sender: UIButton) {
-        togglePlayButton()
         if uCard.label.isHidden == true {
             uCard.showCard()
         }
         gamesPlayer(player: game.players[0])
-        computerPlayers()
+    }
+    
+    //Player clock
+    func nextPlayer() {
+        if currentPlayer == 0 {
+            enablePlayButton(enabled: true)
+        } else {
+            enablePlayButton(enabled: false)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                self.gamesPlayer(player: self.game.players[self.currentPlayer])
+            }
+        }
     }
     
     //Updates UI in case of good slap
@@ -54,8 +74,8 @@ class ViewController: UIViewController {
     }
     
     //Enable/Disable play button
-    func togglePlayButton() {
-        if playButton.isEnabled {
+    func enablePlayButton(enabled: Bool) {
+        if !enabled {
             playButton.isEnabled = false
             playButton.backgroundColor = UIColor.red
         } else {
@@ -65,19 +85,35 @@ class ViewController: UIViewController {
         }
     }
     
-    //Loops through time for computer players : Only set up for two players right now
-    func computerPlayers() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.gamesPlayer(player: self.game.players[1])
-            self.togglePlayButton()
-        }
-    }
-    
     //Logic for a game player
     func gamesPlayer(player: JHPlayer) {
         let card = player.deck.randomCard()
-        game.playCard(card: card)
-        updateCardUI(forCard: card)
+        if card.content != "??" {
+            game.playCard(card: card)
+            updateCardUI(forCard: card)
+            currentPlayer += 1
+            nextPlayer()
+        } else {
+            winner(player: player)
+        }
+    }
+    
+    //Winner, not set up for more than two players
+    func winner(player: JHPlayer) {
+        //Winner found
+        if game.players[0] == player {
+            let alert = UIAlertController(title: "You lose", message: "Boo! You suck!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "I suck :(", style: UIAlertActionStyle.destructive, handler: nil))
+            self.present(alert, animated: true, completion: {
+                //TODO
+            })
+        } else {
+            let alert = UIAlertController(title: "Winner!", message: "Congrats! You win!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Wow!", style: UIAlertActionStyle.destructive, handler: nil))
+            self.present(alert, animated: true, completion: {
+                //TODO
+            })
+        }
     }
     
     //Sets up needed things at load
