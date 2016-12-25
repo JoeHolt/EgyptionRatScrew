@@ -76,17 +76,20 @@ class JHEgyption: NSObject {
         pile = []
     }
     
-    //Slap the pile, returns and cards if warented
-    func slapPile(player: JHPlayer) {
+    //Slap the pile, returns bool of wheather or not the slap was successful
+    func slapPile(player: JHPlayer) -> Bool {
         //Check if valid
         if checkForDouble() {
             returnAndClearPile(player: player)
+            return true
         } else if checkForSandwhich() {
             returnAndClearPile(player: player)
+            return true
         } else {
             //Invalid slap
             pile.append(player.deck.randomCard())
             print("Pile slapped, \(player.name) lost a card")
+            return false
         }
         
     }

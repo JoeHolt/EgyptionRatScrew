@@ -24,17 +24,28 @@ class ViewController: UIViewController {
     
     //Perform slap action
     @IBAction func slapTapped(_ sender: UIButton) {
-        game.slapPile(player: game.players[0])
+        let slapped = game.slapPile(player: game.players[0])
+        //Card slap was successful, clear pile
+        if slapped {
+            slappedUI()
+        }
     }
     
     //Perform play action
     @IBAction func playTapped(_ sender: UIButton) {
         playButton.isEnabled = false
         if uCard.label.isHidden == true {
-            uCard.flipCard() //Card started flipped
+            uCard.showCard()
         }
         gamesPlayer(player: game.players[0])
         computerPlayers()
+    }
+    
+    //Updates UI in case of good slap
+    func slappedUI() {
+        if uCard.label.isHidden == false {
+            uCard.hideCard()
+        }
     }
     
     //Updates the cards UI

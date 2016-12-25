@@ -44,13 +44,31 @@ class UIPlayingCard: UIView {
         backgroundColor = UIColor.black
     }
     
-    //Flips card
+    //Flips card(toggle)
     func flipCard() {
         if label.isHidden {
             backgroundColor = UIColor.white
             label.isHidden = false
         } else {
             backgroundColor = UIColor.black
+            label.isHidden = true
+        }
+    }
+    
+    //Shows card
+    func showCard() {
+        backgroundColor = UIColor.white
+        label.isHidden = false
+        isHidden = false
+    }
+    
+    //Hides card(toggle)
+    func hideCard() {
+        if label.isHidden {
+            isHidden = false
+            label.isHidden = false
+        } else {
+            isHidden = true
             label.isHidden = true
         }
     }
