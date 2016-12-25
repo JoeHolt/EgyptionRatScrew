@@ -17,9 +17,17 @@ class JHEgyption: NSObject {
     
     static let specialValues: [String:Int] = ["A":4,"K":3,"Q":2,"J":1]
     
-    var pile: [JHCard] = []
-    var players: [JHPlayer]! //Player 0 is always the user, others are computers
-    var specialCard: Int = 0 //Number of cards to play after a special card
+    var pile: [JHCard] = []         //Pile of cards that have been played
+    var players: [JHPlayer]!        //Player 0 is always the user, others are computers
+    var lastCard: JHCard?           //Last card to be played to the pile
+    var specialCard: Int = 0        //Number of cards to play after a special card
+    var currentPlayer: Int = 0 {    //Current player - Loop back to start if gone too far
+        didSet {
+            if currentPlayer > players.count {
+                currentPlayer = 0
+            }
+        }
+    }
     
     init(players: [JHPlayer], deck: JHDeck) {
         self.players = players
@@ -27,8 +35,8 @@ class JHEgyption: NSObject {
         deck.shuffleDeck()
         while deck.cards.count > 0 {
             for player in players {
-                if deck.cards.count > 0 {
-                    player.deck.addCard(card: deck.randomCard(), atTop: false)
+                if deck.cards.count > 0 { //Only continue if cards are left
+                    player.deck.addCard(card: deck.randomCard()!, atTop: false)
                 }
             }
         }
@@ -83,22 +91,46 @@ class JHEgyption: NSObject {
         pile = []
     }
     
-    //Slap the pile, returns bool of wheather or not the slap was successful
-    func slapPile(player: JHPlayer) -> Bool {
+    //Slap the pile, returns if a winner was created from the play and if the slap was successful
+    func slapPile(player: JHPlayer) -> (Bool, JHPlayer?) {
+        var winner: JHPlayer? = nil
+        var successeful: Bool = false
         //Check if valid
-        if checkForDouble() {
+        if checkForDouble() || checkForSandwhich() {
+            //Valid slap
+            successeful = true
             returnAndClearPile(player: player)
-            return true
-        } else if checkForSandwhich() {
-            returnAndClearPile(player: player)
-            return true
         } else {
             //Invalid slap
-            pile.append(player.deck.randomCard())
-            print("Pile slapped, \(player.name) lost a card")
-            return false
+            if let card = player.deck.randomCard() {
+                pile.append(card)
+                print("Pile slapped, \(player.name) lost a card")
+            } else {
+                print("Pile slapped, \(player.name) had no cards remaining")
+            }
+            //Check if slap resulted in a winner
+            if let pWinner = checkForWinner() {
+                winner = pWinner
+            }
         }
-        
+        return (successeful, winner)
+    }
+    
+    //Enact a turn, if turn results in winner, said winner is returned, the played card is also returned
+    func enactTurn() -> (JHCard, JHPlayer?) {
+        var winner: JHPlayer? = nil
+        var rCard: JHCard? = nil
+        let player = players[currentPlayer]
+        if let card = player.deck.randomCard() {
+            rCard = card
+            playCard(card: card)
+        }
+        if let pWinner = checkForWinner() {
+            //A winner has been found
+            winner = pWinner
+        }
+        currentPlayer += 1
+        return (rCard!, winner)
     }
     
     //Game checks for a winner, returns player if there is winner, nil otherwise
@@ -116,6 +148,8 @@ class JHEgyption: NSObject {
             return nil
         }
     }
+    
+    //
     
     
 

@@ -42,26 +42,33 @@ class JHDeck: NSObject {
     
     //Remove card at specified index
     func removeCard(atIndex index: Int) {
-        cards.remove(at: index)
+        if cards.count < index && cards.count > 0 {
+            cards.remove(at: index)
+        } else {
+            print("ERROR: Could not remove card at index, out of bounds")
+        }
     }
     
-    //Return and remove card at specified index
-    func cardAtIndex(index: Int) -> JHCard {
-        let card = cards[index]
-        removeCard(atIndex: index)
-        return card
+    //Return and remove card at specified index, returns nil if no cards remain
+    func cardAtIndex(index: Int) -> JHCard? {
+        if cards.count < index && cards.count > 0 {
+            let card = cards[index]
+            removeCard(atIndex: index)
+            return card
+        } else {
+            return nil
+        }
     }
     
-    //Return and remove card at random index
-    func randomCard() -> JHCard {
+    //Return and remove card at random index, returns nil if no cards remain
+    func randomCard() -> JHCard? {
         if cards.count > 0 {
             let index: UInt32 = arc4random_uniform(UInt32(cards.count - 1))
             let card = cards[Int(index)]
             removeCard(atIndex: Int(index))
             return card
         } else {
-            print("Attempted to play a card when no cards remained")
-            return JHCard(suit: "?", value: "?")
+            return nil
         }
         
     }
