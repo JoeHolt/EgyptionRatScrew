@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         if slapped {
             slappedUI()
         }
-        if let winningPlayer = checkWinner() {
+        if let winningPlayer = game.checkForWinner() {
             winner(player: winningPlayer)
         }
     }
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
                 nextPlayer()
             } else {
                 //There is a winner
-                winner(player: checkWinner()!)
+                winner(player: game.checkForWinner()!)
             }
         }
         
@@ -105,22 +105,6 @@ class ViewController: UIViewController {
     //Special card played
     func specialCard() {
         currentPlayer += 1
-    }
-    
-    //Checks for winner
-    func checkWinner() -> JHPlayer? {
-        var playersWithCards: [JHPlayer] = []
-        for player in game.players {
-            if player.deck.cards.count > 0 {
-                playersWithCards.append(player)
-            }
-        }
-        if playersWithCards.count == 1 {
-            print(playersWithCards[0].name, " won")
-            return playersWithCards[0]
-        } else {
-            return nil
-        }
     }
     
     //Winner Display, not set up for more than two players

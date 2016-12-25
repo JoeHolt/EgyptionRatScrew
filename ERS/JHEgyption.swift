@@ -101,6 +101,22 @@ class JHEgyption: NSObject {
         
     }
     
+    //Game checks for a winner, returns player if there is winner, nil otherwise
+    func checkForWinner() -> JHPlayer? {
+        var playersWithCards: [JHPlayer] = []
+        for player in players {
+            if player.deck.cards.count > 0 {
+                playersWithCards.append(player)
+            }
+        }
+        if playersWithCards.count == 1 {
+            print(playersWithCards[0].name, " won")
+            return playersWithCards[0]
+        } else {
+            return nil
+        }
+    }
+    
     
 
 }
