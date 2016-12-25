@@ -13,17 +13,23 @@ import UIKit
  * played then new rules occur, the goal is to have all of the cards
  */
 
+protocol JHEgyptionDelegate {
+    func userTurnDidStart()
+    func userTurnDidEnd()
+}
+
 class JHEgyption: NSObject {
     
     static let specialValues: [String:Int] = ["A":4,"K":3,"Q":2,"J":1]
     
-    var pile: [JHCard] = []         //Pile of cards that have been played
-    var players: [JHPlayer]!        //Player 0 is always the user, others are computers
-    var lastCard: JHCard?           //Last card to be played to the pile
-    var specialCard: Int = 0        //Number of cards to play after a special card
-    var currentPlayer: Int = 0 {    //Current player - Loop back to start if gone too far
+    var pile: [JHCard] = []             //Pile of cards that have been played
+    var players: [JHPlayer]!            //Player 0 is always the user, others are computers
+    var lastCard: JHCard?               //Last card to be played to the pile
+    var specialCard: Int = 0            //Number of cards to play after a special card
+    var delegate: JHEgyptionDelegate?   //Delegate for game
+    var currentPlayer: Int = 0 {        //Current player - Loop back to start if gone too far
         didSet {
-            if currentPlayer > players.count {
+            if currentPlayer > players.count - 1 {
                 currentPlayer = 0
             }
         }
@@ -36,6 +42,7 @@ class JHEgyption: NSObject {
         while deck.cards.count > 0 {
             for player in players {
                 if deck.cards.count > 0 { //Only continue if cards are left
+                    print("Deck making")
                     player.deck.addCard(card: deck.randomCard()!, atTop: false)
                 }
             }
@@ -118,6 +125,9 @@ class JHEgyption: NSObject {
     
     //Enact a turn, if turn results in winner, said winner is returned, the played card is also returned
     func enactTurn() -> (JHCard, JHPlayer?) {
+        if currentPlayer == 0 {
+            delegate?.userTurnDidStart()
+        }
         var winner: JHPlayer? = nil
         var rCard: JHCard? = nil
         let player = players[currentPlayer]
@@ -128,6 +138,9 @@ class JHEgyption: NSObject {
         if let pWinner = checkForWinner() {
             //A winner has been found
             winner = pWinner
+        }
+        if currentPlayer == 0 {
+            delegate?.userTurnDidEnd()
         }
         currentPlayer += 1
         return (rCard!, winner)

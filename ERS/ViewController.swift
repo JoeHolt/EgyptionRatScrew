@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, JHEgyptionDelegate {
     
     @IBOutlet weak var playButton: UIButton!
     
@@ -28,7 +28,20 @@ class ViewController: UIViewController {
     
     //Perform play action
     @IBAction func playTapped(_ sender: UIButton) {
-        
+        //Flip card if it starts flipped over
+        if !uCard.flipped {
+            uCard.flipCard()
+        }
+        let (card, _) = game.enactTurn()
+        updateCardUI(forCard: card)
+    }
+    
+    func userTurnDidStart() {
+        enablePlayButton(enabled: true)
+    }
+    
+    func userTurnDidEnd() {
+        enablePlayButton(enabled: false)
     }
     
     //Updates UI in case of good slap
@@ -73,6 +86,7 @@ class ViewController: UIViewController {
         let players = [JHPlayer(name: "Joe", deck: JHDeck(withCards: false)), JHPlayer(name: "Computer", deck: JHDeck(withCards: false))]
         deck = JHDeck(withCards: true)
         game = JHEgyption(players: players, deck: deck)
+        game.delegate = self
         
         //Set up card ui
         uCard = UIPlayingCard(frame: CGRect(x: 0, y: 0, width: 300, height: 500))

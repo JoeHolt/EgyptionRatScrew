@@ -12,6 +12,7 @@ class UIPlayingCard: UIView {
     
     let label = UILabel()
     let radius: CGFloat = 15.0
+    var flipped: Bool = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,9 +48,11 @@ class UIPlayingCard: UIView {
     //Flips card(toggle)
     func flipCard() {
         if label.isHidden {
+            flipped = true
             backgroundColor = UIColor.white
             label.isHidden = false
         } else {
+            flipped = false
             backgroundColor = UIColor.black
             label.isHidden = true
         }

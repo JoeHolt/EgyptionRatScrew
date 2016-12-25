@@ -42,7 +42,7 @@ class JHDeck: NSObject {
     
     //Remove card at specified index
     func removeCard(atIndex index: Int) {
-        if cards.count < index && cards.count > 0 {
+        if cards.count < index || cards.count > 0 {
             cards.remove(at: index)
         } else {
             print("ERROR: Could not remove card at index, out of bounds")
