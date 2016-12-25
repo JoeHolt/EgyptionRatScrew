@@ -94,8 +94,17 @@ class ViewController: UIViewController {
             currentPlayer += 1
             nextPlayer()
         } else {
-            winner(player: player)
+            if player == game.players[0] {
+                winner(player: player)
+            } else {
+                winner(player: game.players[1])
+            }
         }
+    }
+    
+    //Special card played
+    func specialCard() {
+        currentPlayer += 1
     }
     
     //Winner, not set up for more than two players

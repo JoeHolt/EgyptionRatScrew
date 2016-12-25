@@ -15,7 +15,7 @@ import UIKit
 
 class JHEgyption: NSObject {
     
-    static let specialValues: [String:Int] = ["A":3,"K":2,"Q":1,"J":0]
+    static let specialValues: [String:Int] = ["A":4,"K":3,"Q":2,"J":1]
     
     var pile: [JHCard] = []
     var players: [JHPlayer]! //Player 0 is always the user, others are computers
