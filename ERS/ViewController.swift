@@ -36,8 +36,8 @@ class ViewController: UIViewController {
         if slapped {
             slappedUI()
         }
-        if game.players[0].deck.cards.count == 0 {
-            winner(player: game.players[0])
+        if let winningPlayer = checkWinner() {
+            winner(player: winningPlayer)
         }
     }
     
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         if uCard.label.isHidden == true {
             uCard.showCard()
         }
-        gamesPlayer(player: game.players[0])
+        makeTurn(player: game.players[0])
     }
     
     //Player clock
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         } else {
             enablePlayButton(enabled: false)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                self.gamesPlayer(player: self.game.players[self.currentPlayer])
+                self.makeTurn(player: self.game.players[self.currentPlayer])
             }
         }
     }
@@ -85,21 +85,21 @@ class ViewController: UIViewController {
         }
     }
     
-    //Logic for a game player
-    func gamesPlayer(player: JHPlayer) {
-        let card = player.deck.randomCard()
-        if card.content != "??" {
-            game.playCard(card: card)
-            updateCardUI(forCard: card)
-            currentPlayer += 1
-            nextPlayer()
-        } else {
-            if player == game.players[0] {
-                winner(player: player)
+    //Logic for a game player, not set up for more than two players
+    func makeTurn(player: JHPlayer, numberOfTurns: Int = 1) {
+        for _ in 1...numberOfTurns {
+            let card = player.deck.randomCard()
+            if card.content != "??" {
+                game.playCard(card: card)
+                updateCardUI(forCard: card)
+                currentPlayer += 1
+                nextPlayer()
             } else {
-                winner(player: game.players[1])
+                //There is a winner
+                winner(player: checkWinner()!)
             }
         }
+        
     }
     
     //Special card played
@@ -107,18 +107,36 @@ class ViewController: UIViewController {
         currentPlayer += 1
     }
     
-    //Winner, not set up for more than two players
+    //Checks for winner
+    func checkWinner() -> JHPlayer? {
+        var playersWithCards: [JHPlayer] = []
+        for player in game.players {
+            if player.deck.cards.count > 0 {
+                playersWithCards.append(player)
+            }
+        }
+        if playersWithCards.count == 1 {
+            print(playersWithCards[0].name, " won")
+            return playersWithCards[0]
+        } else {
+            return nil
+        }
+    }
+    
+    //Winner Display, not set up for more than two players
     func winner(player: JHPlayer) {
         //Winner found
         if game.players[0] == player {
-            let alert = UIAlertController(title: "You lose", message: "Boo! You suck!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "I suck :(", style: UIAlertActionStyle.destructive, handler: nil))
+            //Winner is the user
+            let alert = UIAlertController(title: "You win!", message: "Congrats! You win!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
             self.present(alert, animated: true, completion: {
                 //TODO
             })
         } else {
-            let alert = UIAlertController(title: "Winner!", message: "Congrats! You win!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Wow!", style: UIAlertActionStyle.destructive, handler: nil))
+            //Winner is the computer
+            let alert = UIAlertController(title: "You lose", message: "Damn, that sucks", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
             self.present(alert, animated: true, completion: {
                 //TODO
             })
