@@ -34,12 +34,33 @@ class ViewController: UIViewController, JHEgyptionDelegate {
         }
         let (card, _) = game.enactTurn()
         updateCardUI(forCard: card)
+        //Start next [computer] turns
+        computerTurns(numberOfTurns: game.players.count - 1)
     }
     
-    func userTurnDidStart() {
+    func computerTurns(numberOfTurns: Int) {
+        var xNumberOfTurns: Int = numberOfTurns
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            let (card, _) = self.game.enactTurn()
+            self.updateCardUI(forCard: card)
+            xNumberOfTurns -= 1
+            if xNumberOfTurns > 0 {
+                self.computerTurns(numberOfTurns: xNumberOfTurns)
+            }
+        }
+    }
+    
+    //Player one is about to make their move
+    func userTurnWillBegin() {
         enablePlayButton(enabled: true)
     }
     
+    //Player one started their move
+    func userTurnDidStart() {
+        //Nothing
+    }
+    
+    //Player one just finished their move
     func userTurnDidEnd() {
         enablePlayButton(enabled: false)
     }

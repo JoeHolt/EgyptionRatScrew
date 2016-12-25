@@ -14,6 +14,7 @@ import UIKit
  */
 
 protocol JHEgyptionDelegate {
+    func userTurnWillBegin()
     func userTurnDidStart()
     func userTurnDidEnd()
 }
@@ -141,6 +142,9 @@ class JHEgyption: NSObject {
         }
         if currentPlayer == 0 {
             delegate?.userTurnDidEnd()
+        }
+        if currentPlayer == players.count - 1 {
+            delegate?.userTurnWillBegin()
         }
         currentPlayer += 1
         return (rCard!, winner)
