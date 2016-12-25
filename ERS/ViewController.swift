@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     
     //Perform play action
     @IBAction func playTapped(_ sender: UIButton) {
-        playButton.isEnabled = false
+        togglePlayButton()
         if uCard.label.isHidden == true {
             uCard.showCard()
         }
@@ -53,11 +53,23 @@ class ViewController: UIViewController {
         uCard.label.text = card.content
     }
     
+    //Enable/Disable play button
+    func togglePlayButton() {
+        if playButton.isEnabled {
+            playButton.isEnabled = false
+            playButton.backgroundColor = UIColor.red
+        } else {
+            playButton.isEnabled = true
+            playButton.backgroundColor = UIColor.green
+            
+        }
+    }
+    
     //Loops through time for computer players : Only set up for two players right now
     func computerPlayers() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.gamesPlayer(player: self.game.players[1])
-            self.playButton.isEnabled = true
+            self.togglePlayButton()
         }
     }
     

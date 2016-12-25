@@ -23,18 +23,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="lW4-Gd-GaV">
-                                <rect key="frame" x="16" y="574" width="343" height="93"/>
+                                <rect key="frame" x="-4" y="574" width="383" height="93"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgP-FU-kBe">
-                                        <rect key="frame" x="0.0" y="0.0" width="171.5" height="93"/>
-                                        <state key="normal" title="Slap"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="191.5" height="93"/>
+                                        <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Slap">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="slapTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lez-YN-eA7"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqt-GW-mx0">
-                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="93"/>
-                                        <state key="normal" title="Play"/>
+                                        <rect key="frame" x="191.5" y="0.0" width="191.5" height="93"/>
+                                        <color key="backgroundColor" red="0.0" green="0.84270134230000004" blue="0.25736682049999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Play">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="playTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cus-ku-34y"/>
                                         </connections>
@@ -45,8 +51,8 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lW4-Gd-GaV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="554" id="JGQ-0x-qTS"/>
-                            <constraint firstItem="lW4-Gd-GaV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Jue-UI-2cS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="lW4-Gd-GaV" secondAttribute="trailing" id="x21-XZ-lnt"/>
+                            <constraint firstItem="lW4-Gd-GaV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Jue-UI-2cS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lW4-Gd-GaV" secondAttribute="trailing" constant="-20" id="x21-XZ-lnt"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lW4-Gd-GaV" secondAttribute="bottom" id="z9x-E2-cTx"/>
                         </constraints>
                     </view>
