@@ -15,7 +15,6 @@ import UIKit
 
 protocol JHEgyptionDelegate {
     func userTurnWillBegin()
-    func userTurnDidStart()
     func userTurnDidEnd()
 }
 
@@ -125,29 +124,47 @@ class JHEgyption: NSObject {
     }
     
     //Enact a turn, if turn results in winner, said winner is returned, the played card is also returned
-    func enactTurn() -> (JHCard?, JHPlayer?) {
-        if currentPlayer == 0 {
-            delegate?.userTurnDidStart()
-        }
+    func enactTurn(special: Bool = false) -> (JHCard?, JHPlayer?) {
+
         var winner: JHPlayer? = nil
         var rCard: JHCard? = nil
         let player = players[currentPlayer]
         if let card = player.deck.randomCard() {
             rCard = card
             playCard(card: card)
+            if JHEgyption.specialValues.keys.contains(card.value) {
+                //Special cards now in play
+                specialCard = JHEgyption.specialValues[card.value]!
+            }
         }
+        
+        //Check for a winner
         if let pWinner = checkForWinner() {
             //A winner has been found
             winner = pWinner
         }
+        
+        //Delegate methods
         if currentPlayer == 0 {
             delegate?.userTurnDidEnd()
         }
         if currentPlayer == players.count - 1 {
             delegate?.userTurnWillBegin()
         }
-        currentPlayer += 1
+        
+        if !special {
+            currentPlayer += 1
+        }
         return (rCard, winner)
+    }
+    
+    //Special cards in play
+    func specialCardsInPlay() -> Bool {
+        if specialCard == 0 {
+            return false
+        } else {
+            return true
+        }
     }
     
     //Game checks for a winner, returns player if there is winner, nil otherwise

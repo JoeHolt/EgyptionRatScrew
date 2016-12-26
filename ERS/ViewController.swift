@@ -32,11 +32,28 @@ class ViewController: UIViewController, JHEgyptionDelegate {
         if !uCard.flipped {
             uCard.flipCard()
         }
+        performTurn()
+        //Start next (computer) turns
+        computerTurns(numberOfTurns: game.players.count - 1)
+    }
+    
+    //Handle turns for computers with delay.
+    func computerTurns(numberOfTurns: Int) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.performTurn(number: numberOfTurns)
+        }
+    }
+    
+    //Performs a turn
+    func performTurn(number: Int = 1) {
+        var number = number
         let (card, rWinner) = game.enactTurn()
         if let rCard = card {
             updateCardUI(forCard: rCard)
-            //Start next [computer] turns
-            computerTurns(numberOfTurns: game.players.count - 1)
+            number -= 1
+            if number > 0 {
+                self.computerTurns(numberOfTurns: number)
+            }
         }
         if let sWinner = rWinner {
             //Winner found
@@ -44,33 +61,9 @@ class ViewController: UIViewController, JHEgyptionDelegate {
         }
     }
     
-    func computerTurns(numberOfTurns: Int) {
-        var xNumberOfTurns: Int = numberOfTurns
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            let (card, rWinner) = self.game.enactTurn()
-            if let rCard = card {
-                self.updateCardUI(forCard: rCard)
-                xNumberOfTurns -= 1
-                if xNumberOfTurns > 0 {
-                    self.computerTurns(numberOfTurns: xNumberOfTurns)
-                }
-            }
-            if let cWinner = rWinner {
-                //Winner found
-                self.winner(player: cWinner)
-            }
-            
-        }
-    }
-    
     //Player one is about to make their move
     func userTurnWillBegin() {
         enablePlayButton(enabled: true)
-    }
-    
-    //Player one started their move
-    func userTurnDidStart() {
-        //Nothing
     }
     
     //Player one just finished their move
