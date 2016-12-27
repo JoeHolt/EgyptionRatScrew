@@ -125,6 +125,7 @@ class JHEgyption: NSObject {
     //Enacts a turn: Returns: (player, card played, winner)
     func enactTurn(special: Bool = false) -> (JHPlayer, JHCard?, JHPlayer?) {
         
+        var specialPlayed = false   //Says if a special card was played this turn
         var winner: JHPlayer? = nil
         var rCard: JHCard? = nil
         let player = players[currentPlayer]
@@ -134,6 +135,7 @@ class JHEgyption: NSObject {
             rCard = card
             playCard(card: card)
             if JHEgyption.specialValues.keys.contains(card.value) {
+                specialPlayed = true
                 specialCard = JHEgyption.specialValues[card.value]!
             }
         }
@@ -144,22 +146,33 @@ class JHEgyption: NSObject {
             winner = pWinner
         }
         
-        advanceToNextTurn()
+        advanceToNextTurn(specialPlayed: specialPlayed)
         
         return (player, rCard, winner)
     }
     
     //Advance to next turn
-    func advanceToNextTurn() {
+    func advanceToNextTurn(specialPlayed: Bool = false) {
         
-        if currentPlayer == 0 {
-            delegate?.userTurnDidEnd()
+        func delegateMethod() {
+            if currentPlayer == 0 {
+                delegate?.userTurnDidEnd()
+            }
+            if currentPlayer == players.count - 1 {
+                delegate?.userTurnWillBegin()
+            }
         }
-        if currentPlayer == players.count - 1 {
-            delegate?.userTurnWillBegin()
+       
+        //Subtract one from special card if not played this turn
+        if specialPlayed == false && specialCard > 0 {
+            specialCard -= 1
+        }
+        print("Special:", specialCard)
+        if specialPlayed == true || specialCard == 0 {
+            delegateMethod()
+            currentPlayer += 1
         }
         
-        currentPlayer += 1
     }
     
     //Special cards in play
