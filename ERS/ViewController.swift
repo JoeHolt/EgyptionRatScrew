@@ -33,32 +33,32 @@ class ViewController: UIViewController, JHEgyptionDelegate {
             uCard.flipCard()
         }
         performTurn()
-        //Start next (computer) turns
-        computerTurns(numberOfTurns: game.players.count - 1)
     }
     
-    //Handle turns for computers with delay.
-    func computerTurns(numberOfTurns: Int) {
+    //Performs a turn with delay
+    func nextTurn() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.performTurn(number: numberOfTurns)
+            self.performTurn()
         }
     }
     
     //Performs a turn
-    func performTurn(number: Int = 1) {
-        var number = number
-        let (card, rWinner) = game.enactTurn()
+    func performTurn() {
+        
+        let (_, card, rWinner) = game.enactTurn()
         if let rCard = card {
             updateCardUI(forCard: rCard)
-            number -= 1
-            if number > 0 {
-                self.computerTurns(numberOfTurns: number)
-            }
         }
         if let sWinner = rWinner {
-            //Winner found
             winner(player: sWinner)
         }
+        
+        //Only play next turn automatically if a computer is next
+        if !game.userNext() {
+            nextTurn()
+        }
+        
+        
     }
     
     //Player one is about to make their move
@@ -69,6 +69,11 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     //Player one just finished their move
     func userTurnDidEnd() {
         enablePlayButton(enabled: false)
+    }
+    
+    //A special number of cards just finished
+    func specialTurnsDidEnd() {
+        
     }
     
     //Updates UI in case of good slap
