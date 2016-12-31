@@ -51,7 +51,7 @@ class JHDeck: NSObject {
     
     //Return and remove card at specified index, returns nil if no cards remain
     internal func cardAtIndex(index: Int) -> JHCard? {
-        if cards.count < index && cards.count > 0 {
+        if cards.count > index && cards.count > -1 {
             let card = cards[index]
             removeCard(atIndex: index)
             return card

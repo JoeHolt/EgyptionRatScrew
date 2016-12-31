@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		693F47C81E176342005F53AC /* ERSDeckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693F47C71E176342005F53AC /* ERSDeckTests.swift */; };
+		693F47CA1E1763AF005F53AC /* ERSViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693F47C91E1763AF005F53AC /* ERSViewTests.swift */; };
 		6980CE371E0F308B00ED653C /* JHEgyption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6980CE361E0F308B00ED653C /* JHEgyption.swift */; };
 		6980CE391E0F466C00ED653C /* JHPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6980CE381E0F466C00ED653C /* JHPlayer.swift */; };
 		6980CE3B1E0F54C700ED653C /* UIPlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6980CE3A1E0F54C700ED653C /* UIPlayingCard.swift */; };
@@ -17,7 +19,7 @@
 		69A75E0E1E0F2ADC007B54C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69A75E0C1E0F2ADC007B54C8 /* LaunchScreen.storyboard */; };
 		69A75E161E0F2B1E007B54C8 /* JHCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A75E151E0F2B1E007B54C8 /* JHCard.swift */; };
 		69A75E181E0F2C7E007B54C8 /* JHDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A75E171E0F2C7E007B54C8 /* JHDeck.swift */; };
-		69E76B3D1E1752E40070B3A2 /* ERSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E76B321E17525C0070B3A2 /* ERSTests.swift */; };
+		69E76B3D1E1752E40070B3A2 /* ERSGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E76B321E17525C0070B3A2 /* ERSGameTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		693F47C71E176342005F53AC /* ERSDeckTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERSDeckTests.swift; sourceTree = "<group>"; };
+		693F47C91E1763AF005F53AC /* ERSViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ERSViewTests.swift; sourceTree = "<group>"; };
 		6980CE361E0F308B00ED653C /* JHEgyption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHEgyption.swift; sourceTree = "<group>"; };
 		6980CE381E0F466C00ED653C /* JHPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHPlayer.swift; sourceTree = "<group>"; };
 		6980CE3A1E0F54C700ED653C /* UIPlayingCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPlayingCard.swift; sourceTree = "<group>"; };
@@ -44,7 +48,7 @@
 		69A75E151E0F2B1E007B54C8 /* JHCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHCard.swift; sourceTree = "<group>"; };
 		69A75E171E0F2C7E007B54C8 /* JHDeck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHDeck.swift; sourceTree = "<group>"; };
 		69E76B301E17525C0070B3A2 /* ERSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ERSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		69E76B321E17525C0070B3A2 /* ERSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERSTests.swift; sourceTree = "<group>"; };
+		69E76B321E17525C0070B3A2 /* ERSGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERSGameTests.swift; sourceTree = "<group>"; };
 		69E76B341E17525C0070B3A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,7 +109,9 @@
 		69E76B311E17525C0070B3A2 /* ERSTests */ = {
 			isa = PBXGroup;
 			children = (
-				69E76B321E17525C0070B3A2 /* ERSTests.swift */,
+				693F47C91E1763AF005F53AC /* ERSViewTests.swift */,
+				69E76B321E17525C0070B3A2 /* ERSGameTests.swift */,
+				693F47C71E176342005F53AC /* ERSDeckTests.swift */,
 				69E76B341E17525C0070B3A2 /* Info.plist */,
 			);
 			path = ERSTests;
@@ -230,7 +236,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69E76B3D1E1752E40070B3A2 /* ERSTests.swift in Sources */,
+				69E76B3D1E1752E40070B3A2 /* ERSGameTests.swift in Sources */,
+				693F47C81E176342005F53AC /* ERSDeckTests.swift in Sources */,
+				693F47CA1E1763AF005F53AC /* ERSViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +445,7 @@
 				69E76B381E17525C0070B3A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

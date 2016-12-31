@@ -9,7 +9,7 @@
 import XCTest
 @testable import ERS
 
-class ERSTests: XCTestCase {
+class ERSGameTests: XCTestCase {
     
     var vc: ViewController!
     
@@ -58,16 +58,21 @@ class ERSTests: XCTestCase {
     }
     
     func testReturnAndClearPileClears() {
-        vc.game.returnAndClearPile()
-        
+        vc.game.pile = [JHCard(suit: JHCard.suits[0], value: "1"), JHCard(suit: JHCard.suits[1], value: "1")]
+        vc.game.returnAndClearPile(player: JHPlayer(name: "Test", deck: JHDeck(withCards: true)))
+        XCTAssert(vc.game.pile.count == 0, "returnAndClearPileClear does not clear pile")
     }
     
+    func testWinnerCheck() {
+        vc.game.players = [JHPlayer(name: "Test1", deck: JHDeck(withCards: true)), JHPlayer(name: "Test2", deck: JHDeck(withCards: true)), JHPlayer(name: "Test3", deck: JHDeck(withCards: true))]
+        XCTAssert(vc.game.checkForWinner() == nil, "Game returns a winner when there is no winner")
+        vc.game.players = [JHPlayer(name: "Test1", deck: JHDeck(withCards: true)), JHPlayer(name: "Test2", deck: JHDeck(withCards: false)), JHPlayer(name: "Test3", deck: JHDeck(withCards: false))]
+        XCTAssert(vc.game.checkForWinner() != nil, "Game does not return a winner when there is a winner")
+    }
     
-    
-    
-    
-    
-    
-    
+    func testUserIsNext() {
+        vc.game.currentPlayer = 0
+        XCTAssert(vc.game.userNext(), "Displays user is next incorrectly")
+    }
     
 }
