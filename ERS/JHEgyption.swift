@@ -29,6 +29,7 @@ class JHEgyption: NSObject {
     var specialCard: Int = 0            //Number of cards to play after a special card
     var specialPlayer: JHPlayer? = nil  //The player that played a "special" card and will recive the benifits
     var delegate: JHEgyptionDelegate?   //Delegate for game
+    var cardsPlayed: Int = 0            //Number of cards played
     var currentPlayer: Int = 0 {        //Current player - Loop back to start if gone too far
         didSet {
             if currentPlayer > players.count - 1 {
@@ -149,7 +150,7 @@ class JHEgyption: NSObject {
         }
         
         advanceToNextTurn(specialPlayed: specialPlayed)
-        
+        cardsPlayed += 1
         return (player, rCard, winner)
     }
     

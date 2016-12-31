@@ -13,6 +13,8 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var playerOneDisplay: UILabel!   //Displays how many cards are left for player one
     @IBOutlet weak var playerTwoDisplay: UILabel!   //Displays how many cards are left for player two
+    @IBOutlet weak var turnDisplay: UILabel!        //Displays how many turns there have been
+    @IBOutlet weak var timeDisplay: UILabel!        //Displays reaction time
     @IBOutlet weak var totalDisplay: UILabel!
     
     var uCard = UIPlayingCard() //UI Card
@@ -24,6 +26,10 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     //Perform slap action
@@ -45,6 +51,7 @@ class ViewController: UIViewController, JHEgyptionDelegate {
         playerOneDisplay.text = "Player 1 cards: \(game.players[0].deck.cards.count)"
         playerTwoDisplay.text = "Player 2 cards: \(game.players[1].deck.cards.count)"
         totalDisplay.text = "Total: \(game.players[0].deck.cards.count + game.players[1].deck.cards.count + game.pile.count)"
+        turnDisplay.text = "Turns: \(game.cardsPlayed)"
     }
     
     //Performs a turn with delay

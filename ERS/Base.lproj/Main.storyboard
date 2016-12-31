@@ -65,19 +65,37 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Turns" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6E0-9R-JDQ">
+                                <rect key="frame" x="10" y="103.5" width="355" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8b-AH-8ag">
+                                <rect key="frame" x="10" y="134" width="355" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="t8b-AH-8ag" secondAttribute="trailing" constant="10" id="4R0-sv-cac"/>
+                            <constraint firstItem="6E0-9R-JDQ" firstAttribute="top" secondItem="7RC-Sg-Dzq" secondAttribute="bottom" constant="10" id="HoX-bg-hPt"/>
+                            <constraint firstAttribute="trailing" secondItem="6E0-9R-JDQ" secondAttribute="trailing" constant="10" id="Hq3-bQ-lXf"/>
                             <constraint firstItem="lW4-Gd-GaV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="554" id="JGQ-0x-qTS"/>
                             <constraint firstItem="lW4-Gd-GaV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Jue-UI-2cS"/>
                             <constraint firstItem="SDi-XG-KpV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="OK8-31-lCs"/>
                             <constraint firstAttribute="trailing" secondItem="SDi-XG-KpV" secondAttribute="trailing" constant="10" id="PQr-FL-SPg"/>
                             <constraint firstItem="SDi-XG-KpV" firstAttribute="top" secondItem="PQ6-il-xOG" secondAttribute="bottom" constant="10" id="S7Z-qC-olR"/>
+                            <constraint firstItem="t8b-AH-8ag" firstAttribute="top" secondItem="6E0-9R-JDQ" secondAttribute="bottom" constant="10" id="Uta-gq-TBy"/>
                             <constraint firstAttribute="trailing" secondItem="7RC-Sg-Dzq" secondAttribute="trailing" constant="10" id="XnX-gx-UBS"/>
                             <constraint firstAttribute="trailing" secondItem="PQ6-il-xOG" secondAttribute="trailing" constant="10" id="ZBT-3x-YZX"/>
+                            <constraint firstItem="6E0-9R-JDQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="dUo-bb-RJI"/>
                             <constraint firstItem="7RC-Sg-Dzq" firstAttribute="top" secondItem="SDi-XG-KpV" secondAttribute="bottom" constant="10" id="lmX-e8-spy"/>
                             <constraint firstItem="PQ6-il-xOG" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="12" id="rgG-Yt-dcA"/>
                             <constraint firstItem="PQ6-il-xOG" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="rux-iM-2HO"/>
+                            <constraint firstItem="t8b-AH-8ag" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="tJi-sb-RDh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lW4-Gd-GaV" secondAttribute="trailing" constant="-20" id="x21-XZ-lnt"/>
                             <constraint firstItem="7RC-Sg-Dzq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="ySG-O2-zkz"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lW4-Gd-GaV" secondAttribute="bottom" id="z9x-E2-cTx"/>
@@ -87,7 +105,9 @@
                         <outlet property="playButton" destination="Vqt-GW-mx0" id="itG-ek-8i3"/>
                         <outlet property="playerOneDisplay" destination="PQ6-il-xOG" id="FLR-wC-9cB"/>
                         <outlet property="playerTwoDisplay" destination="SDi-XG-KpV" id="Npr-cV-Tid"/>
+                        <outlet property="timeDisplay" destination="t8b-AH-8ag" id="ORK-IE-Lmo"/>
                         <outlet property="totalDisplay" destination="7RC-Sg-Dzq" id="gcb-VQ-KAa"/>
+                        <outlet property="turnDisplay" destination="6E0-9R-JDQ" id="4Lu-rl-1jL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
