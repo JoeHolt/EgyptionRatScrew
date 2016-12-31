@@ -16,7 +16,7 @@ import UIKit
 protocol JHEgyptionDelegate {
     func userTurnWillBegin()
     func userTurnDidEnd()
-    func slapRequired(withDelay: Bool)
+    func clearPile(withDelay: Bool)
 }
 
 class JHEgyption: NSObject {
@@ -170,16 +170,15 @@ class JHEgyption: NSObject {
             specialCard -= 1
             //Special card play finished
             if specialCard == 0 {
+                //TODO: Make this function not allow player slapping until the pile has been collected
                 if let player = specialPlayer {
-                    player.deck.addCards(cards: pile, atTop: false)
-                    pile = []
-                    delegate?.slapRequired(withDelay: true)
+                    returnAndClearPile(player: player)
+                    delegate?.clearPile(withDelay: true)
                 } else {
                     print("Special cards have no host player")
                 }
             }
         }
-        print("Special:", specialCard)
         if specialPlayed == true || specialCard == 0 {
             delegateMethod()
             currentPlayer += 1

@@ -16,6 +16,7 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     var game: JHEgyption!
     var deck: JHDeck!
     var delay: Double = 1.0
+    var delayNextTurn: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,9 +57,15 @@ class ViewController: UIViewController, JHEgyptionDelegate {
         
         //Only play next turn automatically if a computer is next
         if !game.userNext() {
-            nextTurn()
+            if delayNextTurn == true {
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    self.nextTurn()
+                }
+                delayNextTurn = false
+            } else {
+                nextTurn()
+            }
         }
-        
         
     }
     
@@ -73,8 +80,11 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     }
     
     //Game requests a slap
-    func slapRequired(withDelay: Bool) {
+    func clearPile(withDelay: Bool) {
+        print("Pile requestested to be cleared")
+        delayNextTurn = true    //Delay next turn
         if withDelay {
+            print("with a dealy")
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 self.slappedUI()
             }
@@ -92,6 +102,9 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     
     //Updates the cards UI
     func updateCardUI(forCard card: JHCard) {
+        if uCard.isHidden {
+            uCard.showCard()
+        }
         uCard.label.text = card.content
     }
     
