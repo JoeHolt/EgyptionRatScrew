@@ -15,7 +15,7 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     @IBOutlet weak var playerTwoDisplay: UILabel!   //Displays how many cards are left for player two
     @IBOutlet weak var turnDisplay: UILabel!        //Displays how many turns there have been
     @IBOutlet weak var timeDisplay: UILabel!        //Displays reaction time
-    @IBOutlet weak var totalDisplay: UILabel!
+    @IBOutlet weak var totalDisplay: UILabel!       //Displays how many turns there have been
     
     var uCard = UIPlayingCard() //UI Card
     var game: JHEgyption!
@@ -32,9 +32,15 @@ class ViewController: UIViewController, JHEgyptionDelegate {
         return true
     }
     
-    //Perform slap action
+    //Perform slap action by user
     @IBAction func slapTapped(_ sender: UIButton) {
-        
+        let (successful, xWinner) = game.slapPile(player: game.players[0])
+        if let xWinner = xWinner {
+            winner(player: xWinner)
+        }
+        if successful {
+            slappedUI()
+        }
     }
     
     //Perform play action
@@ -102,10 +108,8 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     
     //Game requests a slap
     internal func clearPile(withDelay: Bool) {
-        print("Pile requestested to be cleared")
         delayNextTurn = true    //Delay next turn
         if withDelay {
-            print("with a dealy")
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 self.slappedUI()
             }
