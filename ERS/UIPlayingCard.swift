@@ -29,7 +29,7 @@ class UIPlayingCard: UIView {
     }
     
     //Adds information label
-    func addLabel() {
+    internal func addLabel() {
         label.text = ""
         label.font = UIFont.systemFont(ofSize: 30)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -41,12 +41,12 @@ class UIPlayingCard: UIView {
     }
     
     //Adds image view to allow for card back to show
-    func addBack() {
+    internal func addBack() {
         backgroundColor = UIColor.black
     }
     
     //Flips card(toggle)
-    func flipCard() {
+    internal func flipCard() {
         if label.isHidden {
             flipped = true
             backgroundColor = UIColor.white
@@ -59,14 +59,14 @@ class UIPlayingCard: UIView {
     }
     
     //Shows card
-    func showCard() {
+    internal func showCard() {
         backgroundColor = UIColor.white
         label.isHidden = false
         isHidden = false
     }
     
     //Hides card(toggle)
-    func hideCard() {
+    internal func hideCard() {
         if label.isHidden {
             isHidden = false
             label.isHidden = false

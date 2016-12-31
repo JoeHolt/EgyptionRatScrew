@@ -52,7 +52,7 @@ class JHEgyption: NSObject {
     }
     
     //Play a card to the pile
-    func playCard(card: JHCard) {
+    internal func playCard(card: JHCard) {
         pile.insert(card, at: 0)
         if JHEgyption.specialValues.keys.contains(card.value) {
             specialCard = JHEgyption.specialValues[card.value]!
@@ -66,7 +66,7 @@ class JHEgyption: NSObject {
     }
     
     //Checks for two in a row
-    func checkForDouble() -> Bool {
+    internal func checkForDouble() -> Bool {
         if pile.count >= 2 {
             if pile[0].value == pile[1].value {
                 return true
@@ -79,7 +79,7 @@ class JHEgyption: NSObject {
     }
     
     //Checks for sandwich
-    func checkForSandwhich() -> Bool {
+    internal func checkForSandwhich() -> Bool {
         if pile.count >= 3 {
             if pile[0].value == pile[2].value {
                 return true
@@ -92,14 +92,14 @@ class JHEgyption: NSObject {
     }
     
     //Returns the pile and clears it
-    private func returnAndClearPile(player: JHPlayer) {
+    internal func returnAndClearPile(player: JHPlayer) {
         print("Pile slapped, \(player.name) collected \(pile.count) cards")
         player.deck.addCards(cards: pile, atTop: false)
         pile = []
     }
     
     //Slap the pile, returns if a winner was created from the play and if the slap was successful
-    func slapPile(player: JHPlayer) -> (Bool, JHPlayer?) {
+    internal func slapPile(player: JHPlayer) -> (Bool, JHPlayer?) {
         var winner: JHPlayer? = nil
         var successeful: Bool = false
         //Check if valid
@@ -124,7 +124,7 @@ class JHEgyption: NSObject {
     }
     
     //Enacts a turn: Returns: (player, card played, winner)
-    func enactTurn(special: Bool = false) -> (JHPlayer, JHCard?, JHPlayer?) {
+    internal func enactTurn(special: Bool = false) -> (JHPlayer, JHCard?, JHPlayer?) {
         
         var specialPlayed = false   //Says if a special card was played this turn
         var winner: JHPlayer? = nil
@@ -154,7 +154,7 @@ class JHEgyption: NSObject {
     }
     
     //Advance to next turn
-    func advanceToNextTurn(specialPlayed: Bool = false) {
+    internal func advanceToNextTurn(specialPlayed: Bool = false) {
         
         func delegateMethod() {
             if currentPlayer == 0 {
@@ -187,7 +187,7 @@ class JHEgyption: NSObject {
     }
     
     //Special cards in play
-    func specialCardsInPlay() -> Bool {
+    internal func specialCardsInPlay() -> Bool {
         if specialCard == 0 {
             return false
         } else {
@@ -196,7 +196,7 @@ class JHEgyption: NSObject {
     }
     
     //Game checks for a winner, returns player if there is winner, nil otherwise
-    func checkForWinner() -> JHPlayer? {
+    internal func checkForWinner() -> JHPlayer? {
         var playersWithCards: [JHPlayer] = []
         for player in players {
             if player.deck.cards.count > 0 {
@@ -212,7 +212,7 @@ class JHEgyption: NSObject {
     }
     
     //Check if next player is user
-    func userNext() -> Bool {
+    internal func userNext() -> Bool {
         if currentPlayer == 0 {
             return true
         }

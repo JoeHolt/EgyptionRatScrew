@@ -17,7 +17,18 @@
 		69A75E0E1E0F2ADC007B54C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69A75E0C1E0F2ADC007B54C8 /* LaunchScreen.storyboard */; };
 		69A75E161E0F2B1E007B54C8 /* JHCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A75E151E0F2B1E007B54C8 /* JHCard.swift */; };
 		69A75E181E0F2C7E007B54C8 /* JHDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A75E171E0F2C7E007B54C8 /* JHDeck.swift */; };
+		69E76B3D1E1752E40070B3A2 /* ERSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E76B321E17525C0070B3A2 /* ERSTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		69E76B351E17525C0070B3A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69A75DF81E0F2ADC007B54C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 69A75DFF1E0F2ADC007B54C8;
+			remoteInfo = ERS;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		6980CE361E0F308B00ED653C /* JHEgyption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHEgyption.swift; sourceTree = "<group>"; };
@@ -32,10 +43,20 @@
 		69A75E0F1E0F2ADC007B54C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69A75E151E0F2B1E007B54C8 /* JHCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHCard.swift; sourceTree = "<group>"; };
 		69A75E171E0F2C7E007B54C8 /* JHDeck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHDeck.swift; sourceTree = "<group>"; };
+		69E76B301E17525C0070B3A2 /* ERSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ERSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		69E76B321E17525C0070B3A2 /* ERSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERSTests.swift; sourceTree = "<group>"; };
+		69E76B341E17525C0070B3A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		69A75DFD1E0F2ADC007B54C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69E76B2D1E17525C0070B3A2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -49,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				69A75E021E0F2ADC007B54C8 /* ERS */,
+				69E76B311E17525C0070B3A2 /* ERSTests */,
 				69A75E011E0F2ADC007B54C8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				69A75E001E0F2ADC007B54C8 /* ERS.app */,
+				69E76B301E17525C0070B3A2 /* ERSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -79,6 +102,15 @@
 			path = ERS;
 			sourceTree = "<group>";
 		};
+		69E76B311E17525C0070B3A2 /* ERSTests */ = {
+			isa = PBXGroup;
+			children = (
+				69E76B321E17525C0070B3A2 /* ERSTests.swift */,
+				69E76B341E17525C0070B3A2 /* Info.plist */,
+			);
+			path = ERSTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -99,6 +131,24 @@
 			productReference = 69A75E001E0F2ADC007B54C8 /* ERS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		69E76B2F1E17525C0070B3A2 /* ERSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69E76B391E17525C0070B3A2 /* Build configuration list for PBXNativeTarget "ERSTests" */;
+			buildPhases = (
+				69E76B2C1E17525C0070B3A2 /* Sources */,
+				69E76B2D1E17525C0070B3A2 /* Frameworks */,
+				69E76B2E1E17525C0070B3A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				69E76B361E17525C0070B3A2 /* PBXTargetDependency */,
+			);
+			name = ERSTests;
+			productName = ERSTests;
+			productReference = 69E76B301E17525C0070B3A2 /* ERSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -113,6 +163,12 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = G89T23PT2Q;
 						ProvisioningStyle = Automatic;
+					};
+					69E76B2F1E17525C0070B3A2 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = G89T23PT2Q;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 69A75DFF1E0F2ADC007B54C8;
 					};
 				};
 			};
@@ -130,6 +186,7 @@
 			projectRoot = "";
 			targets = (
 				69A75DFF1E0F2ADC007B54C8 /* ERS */,
+				69E76B2F1E17525C0070B3A2 /* ERSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -142,6 +199,13 @@
 				69A75E0E1E0F2ADC007B54C8 /* LaunchScreen.storyboard in Resources */,
 				69A75E0B1E0F2ADC007B54C8 /* Assets.xcassets in Resources */,
 				69A75E091E0F2ADC007B54C8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69E76B2E1E17525C0070B3A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +226,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		69E76B2C1E17525C0070B3A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69E76B3D1E1752E40070B3A2 /* ERSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		69E76B361E17525C0070B3A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 69A75DFF1E0F2ADC007B54C8 /* ERS */;
+			targetProxy = 69E76B351E17525C0070B3A2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		69A75E071E0F2ADC007B54C8 /* Main.storyboard */ = {
@@ -301,6 +381,34 @@
 			};
 			name = Release;
 		};
+		69E76B371E17525C0070B3A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = G89T23PT2Q;
+				INFOPLIST_FILE = ERSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.JoeHolt.ERSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ERS.app/ERS";
+			};
+			name = Debug;
+		};
+		69E76B381E17525C0070B3A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = G89T23PT2Q;
+				INFOPLIST_FILE = ERSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.JoeHolt.ERSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ERS.app/ERS";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -321,6 +429,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		69E76B391E17525C0070B3A2 /* Build configuration list for PBXNativeTarget "ERSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69E76B371E17525C0070B3A2 /* Debug */,
+				69E76B381E17525C0070B3A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

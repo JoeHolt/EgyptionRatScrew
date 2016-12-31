@@ -41,21 +41,21 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     }
     
     //Updates player labels
-    func updateLabels() {
+    internal func updateLabels() {
         playerOneDisplay.text = "Player 1 cards: \(game.players[0].deck.cards.count)"
         playerTwoDisplay.text = "Player 2 cards: \(game.players[1].deck.cards.count)"
         totalDisplay.text = "Total: \(game.players[0].deck.cards.count + game.players[1].deck.cards.count + game.pile.count)"
     }
     
     //Performs a turn with delay
-    func nextTurn() {
+    internal func nextTurn() {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.performTurn()
         }
     }
     
     //Performs a turn
-    func performTurn() {
+    internal func performTurn() {
         
         let (_, card, rWinner) = game.enactTurn()
         if let rCard = card {
@@ -84,17 +84,17 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     }
     
     //Player one is about to make their move
-    func userTurnWillBegin() {
+    internal func userTurnWillBegin() {
         enablePlayButton(enabled: true)
     }
     
     //Player one just finished their move
-    func userTurnDidEnd() {
+    internal func userTurnDidEnd() {
         enablePlayButton(enabled: false)
     }
     
     //Game requests a slap
-    func clearPile(withDelay: Bool) {
+    internal func clearPile(withDelay: Bool) {
         print("Pile requestested to be cleared")
         delayNextTurn = true    //Delay next turn
         if withDelay {
@@ -108,14 +108,14 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     }
     
     //Updates UI in case of good slap
-    func slappedUI() {
+    internal func slappedUI() {
         if uCard.label.isHidden == false {
             uCard.hideCard()
         }
     }
     
     //Updates the cards UI
-    func updateCardUI(forCard card: JHCard) {
+    internal func updateCardUI(forCard card: JHCard) {
         if uCard.isHidden {
             uCard.showCard()
         }
@@ -123,7 +123,7 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     }
     
     //Enable/Disable play button
-    func enablePlayButton(enabled: Bool) {
+    internal func enablePlayButton(enabled: Bool) {
         if !enabled {
             playButton.isEnabled = false
             playButton.backgroundColor = UIColor.red
@@ -135,7 +135,7 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     }
     
     //UI Winner Display
-    func winner(player: JHPlayer) {
+    internal func winner(player: JHPlayer) {
         let alert = UIAlertController(title: "\(player.name) Wins!", message: "Congrats, \(player.name), you win nothing!", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.cancel, handler: nil))
         self.present(alert, animated: true, completion: {
@@ -144,7 +144,7 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     }
     
     //Sets up needed things at load
-    func setUp() {
+    internal func setUp() {
         //misc
         self.view.backgroundColor = UIColor.lightGray
         

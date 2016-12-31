@@ -26,12 +26,12 @@ class JHDeck: NSObject {
     }
     
     //Add a singular card to deck
-    func addCard(card: JHCard, atTop: Bool) {
+    internal func addCard(card: JHCard, atTop: Bool) {
         addCards(cards: [card], atTop: atTop)
     }
     
     //Add cards to deck
-    func addCards(cards: [JHCard], atTop: Bool) {
+    internal func addCards(cards: [JHCard], atTop: Bool) {
         //Cards inserted at top or bottom
         if atTop {
             self.cards.insert(contentsOf: cards, at: 0)
@@ -41,7 +41,7 @@ class JHDeck: NSObject {
     }
     
     //Remove card at specified index
-    func removeCard(atIndex index: Int) {
+    internal func removeCard(atIndex index: Int) {
         if cards.count < index || cards.count > 0 {
             cards.remove(at: index)
         } else {
@@ -50,7 +50,7 @@ class JHDeck: NSObject {
     }
     
     //Return and remove card at specified index, returns nil if no cards remain
-    func cardAtIndex(index: Int) -> JHCard? {
+    internal func cardAtIndex(index: Int) -> JHCard? {
         if cards.count < index && cards.count > 0 {
             let card = cards[index]
             removeCard(atIndex: index)
@@ -61,7 +61,7 @@ class JHDeck: NSObject {
     }
     
     //Return and remove card at random index, returns nil if no cards remain
-    func randomCard() -> JHCard? {
+    internal func randomCard() -> JHCard? {
         if cards.count > 0 {
             let index: UInt32 = arc4random_uniform(UInt32(cards.count - 1))
             let card = cards[Int(index)]
@@ -74,7 +74,7 @@ class JHDeck: NSObject {
     }
     
     //Shuffles the deck
-    func shuffleDeck() {
+    internal func shuffleDeck() {
         cards = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: cards) as! [JHCard]
     }
 
