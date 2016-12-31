@@ -16,7 +16,7 @@ import UIKit
 protocol JHEgyptionDelegate {
     func userTurnWillBegin()
     func userTurnDidEnd()
-    func specialTurnsDidEnd()
+    func slapRequired(withDelay: Bool)
 }
 
 class JHEgyption: NSObject {
@@ -27,6 +27,7 @@ class JHEgyption: NSObject {
     var players: [JHPlayer]!            //Player 0 is always the user, others are computers
     var lastCard: JHCard?               //Last card to be played to the pile
     var specialCard: Int = 0            //Number of cards to play after a special card
+    var specialPlayer: JHPlayer? = nil  //The player that played a "special" card and will recive the benifits
     var delegate: JHEgyptionDelegate?   //Delegate for game
     var currentPlayer: Int = 0 {        //Current player - Loop back to start if gone too far
         didSet {
@@ -136,6 +137,7 @@ class JHEgyption: NSObject {
             playCard(card: card)
             if JHEgyption.specialValues.keys.contains(card.value) {
                 specialPlayed = true
+                specialPlayer = player
                 specialCard = JHEgyption.specialValues[card.value]!
             }
         }
@@ -166,6 +168,16 @@ class JHEgyption: NSObject {
         //Subtract one from special card if not played this turn
         if specialPlayed == false && specialCard > 0 {
             specialCard -= 1
+            //Special card play finished
+            if specialCard == 0 {
+                if let player = specialPlayer {
+                    player.deck.addCards(cards: pile, atTop: false)
+                    pile = []
+                    delegate?.slapRequired(withDelay: true)
+                } else {
+                    print("Special cards have no host player")
+                }
+            }
         }
         print("Special:", specialCard)
         if specialPlayed == true || specialCard == 0 {

@@ -15,6 +15,7 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     var uCard = UIPlayingCard() //UI Card
     var game: JHEgyption!
     var deck: JHDeck!
+    var delay: Double = 1.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,7 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     
     //Performs a turn with delay
     func nextTurn() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.performTurn()
         }
     }
@@ -71,9 +72,15 @@ class ViewController: UIViewController, JHEgyptionDelegate {
         enablePlayButton(enabled: false)
     }
     
-    //A special number of cards just finished
-    func specialTurnsDidEnd() {
-        
+    //Game requests a slap
+    func slapRequired(withDelay: Bool) {
+        if withDelay {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                self.slappedUI()
+            }
+        } else {
+            slappedUI()
+        }
     }
     
     //Updates UI in case of good slap
