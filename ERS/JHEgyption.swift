@@ -16,7 +16,7 @@ import UIKit
 protocol JHEgyptionDelegate {
     func userTurnWillBegin()
     func userTurnDidEnd()
-    func clearPile(withDelay: Bool)
+    func clearPile(withDelay: Bool, forPlayer player: JHPlayer)
 }
 
 class JHEgyption: NSObject {
@@ -174,7 +174,7 @@ class JHEgyption: NSObject {
                 //TODO: Make this function not allow player slapping until the pile has been collected
                 if let player = specialPlayer {
                     returnAndClearPile(player: player)
-                    delegate?.clearPile(withDelay: true)
+                    delegate?.clearPile(withDelay: true, forPlayer: player)
                 } else {
                     print("Special cards have no host player")
                 }

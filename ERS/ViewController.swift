@@ -17,6 +17,7 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     @IBOutlet weak var timeDisplay: UILabel!        //Displays reaction time
     @IBOutlet weak var totalDisplay: UILabel!       //Displays how many turns there have been
     
+    let generator = UINotificationFeedbackGenerator()
     var uCard = UIPlayingCard() //UI Card
     var game: JHEgyption!
     var deck: JHDeck!
@@ -39,7 +40,10 @@ class ViewController: UIViewController, JHEgyptionDelegate {
             winner(player: xWinner)
         }
         if successful {
+            generator.notificationOccurred(.success)
             slappedUI()
+        } else {
+            generator.notificationOccurred(.error)
         }
     }
     
@@ -96,18 +100,19 @@ class ViewController: UIViewController, JHEgyptionDelegate {
         
     }
     
-    //Player one is about to make their move
+    
+    //Delegate - Player one is about to make their move
     internal func userTurnWillBegin() {
         enablePlayButton(enabled: true)
     }
     
-    //Player one just finished their move
+    //Delegate - Player one just finished their move
     internal func userTurnDidEnd() {
         enablePlayButton(enabled: false)
     }
     
-    //Game requests a slap
-    internal func clearPile(withDelay: Bool) {
+    //Delegate - Game requests a slap
+    internal func clearPile(withDelay: Bool, forPlayer player: JHPlayer) {
         delayNextTurn = true    //Delay next turn
         if withDelay {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
@@ -115,6 +120,14 @@ class ViewController: UIViewController, JHEgyptionDelegate {
             }
         } else {
             slappedUI()
+        }
+        
+        func vibration() {
+            if player == game.players[0] {
+                generator.notificationOccurred(.success)
+            } else {
+                generator.notificationOccurred(.error)
+            }
         }
     }
     
