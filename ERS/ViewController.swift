@@ -11,11 +11,14 @@ import UIKit
 class ViewController: UIViewController, JHEgyptionDelegate {
     
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playerOneDisplay: UILabel!   //Displays how many cards are left for player one
+    @IBOutlet weak var playerTwoDisplay: UILabel!   //Displays how many cards are left for player two
+    @IBOutlet weak var totalDisplay: UILabel!
     
     var uCard = UIPlayingCard() //UI Card
     var game: JHEgyption!
     var deck: JHDeck!
-    var delay: Double = 1.0
+    var delay: Double = 0.5
     var delayNextTurn: Bool = false
     
     override func viewDidLoad() {
@@ -37,6 +40,13 @@ class ViewController: UIViewController, JHEgyptionDelegate {
         performTurn()
     }
     
+    //Updates player labels
+    func updateLabels() {
+        playerOneDisplay.text = "Player 1 cards: \(game.players[0].deck.cards.count)"
+        playerTwoDisplay.text = "Player 2 cards: \(game.players[1].deck.cards.count)"
+        totalDisplay.text = "Total: \(game.players[0].deck.cards.count + game.players[1].deck.cards.count + game.pile.count)"
+    }
+    
     //Performs a turn with delay
     func nextTurn() {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
@@ -55,7 +65,9 @@ class ViewController: UIViewController, JHEgyptionDelegate {
             winner(player: sWinner)
         }
         
+        
         //Only play next turn automatically if a computer is next
+        //TODO: The delay next turn delay helps solve issues but is not always needed because it adds uneeded delay
         if !game.userNext() {
             if delayNextTurn == true {
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
@@ -66,6 +78,8 @@ class ViewController: UIViewController, JHEgyptionDelegate {
                 nextTurn()
             }
         }
+        
+        updateLabels()
         
     }
     
