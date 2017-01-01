@@ -35,8 +35,10 @@ class JHEgyption: NSObject {
             if currentPlayer > players.count - 1 {
                 currentPlayer = 0
             }
+            print("Current Player: ", currentPlayer)
         }
     }
+    var computerSlapDelay: Double = 0.5
     
     init(players: [JHPlayer], deck: JHDeck) {
         self.players = players
@@ -55,9 +57,6 @@ class JHEgyption: NSObject {
     //Play a card to the pile
     internal func playCard(card: JHCard) {
         pile.insert(card, at: 0)
-        if JHEgyption.specialValues.keys.contains(card.value) {
-            specialCard = JHEgyption.specialValues[card.value]!
-        }
         if checkForDouble() {
             //print("Two in a row slap possible: \(pile[0].content) and \(pile[1].content)")
         }
@@ -97,6 +96,7 @@ class JHEgyption: NSObject {
         print("Pile slapped, \(player.name) collected \(pile.count) cards")
         player.deck.addCards(cards: pile, atTop: false)
         pile = []
+        specialCard = 0
     }
     
     //Slap the pile, returns if a winner was created from the play and if the slap was successful
@@ -107,7 +107,13 @@ class JHEgyption: NSObject {
         if checkForDouble() || checkForSandwhich() {
             //Valid slap
             successeful = true
+            specialCard = 0
             returnAndClearPile(player: player)
+            for x in 0...players.count - 1 {
+                if players[x] == player {
+                    currentPlayer = x
+                }
+            }
         } else {
             //Invalid slap
             if let card = player.deck.randomCard() {
@@ -157,6 +163,8 @@ class JHEgyption: NSObject {
     //Advance to next turn
     internal func advanceToNextTurn(specialPlayed: Bool = false) {
         
+        var forceNextTurn: Bool = false
+        
         func delegateMethod() {
             if currentPlayer == 0 {
                 delegate?.userTurnDidEnd()
@@ -170,19 +178,24 @@ class JHEgyption: NSObject {
         if specialPlayed == false && specialCard > 0 {
             specialCard -= 1
             //Special card play finished
-            if specialCard == 0 {
+            if specialCard <= 0 {
                 //TODO: Make this function not allow player slapping until the pile has been collected
                 if let player = specialPlayer {
                     returnAndClearPile(player: player)
+                    //currentPlayer -= 1  //Subtract one from the current player so that the player remains the same bc they get it
                     delegate?.clearPile(withDelay: true, forPlayer: player)
+                    forceNextTurn = true
                 } else {
                     print("Special cards have no host player")
                 }
             }
         }
-        if specialPlayed == true || specialCard == 0 {
+        if specialPlayed == true || specialCard <= 0 {
             delegateMethod()
             currentPlayer += 1
+        }
+        if forceNextTurn {
+            let (_,_,_) = enactTurn()
         }
         
     }

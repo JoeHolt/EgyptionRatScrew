@@ -21,7 +21,7 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     var uCard = UIPlayingCard() //UI Card
     var game: JHEgyption!
     var deck: JHDeck!
-    var delay: Double = 0.5
+    var delay: Double = 0.75
     var delayNextTurn: Bool = false
     
     override func viewDidLoad() {
@@ -41,7 +41,7 @@ class ViewController: UIViewController, JHEgyptionDelegate {
         }
         if successful {
             generator.notificationOccurred(.success)
-            slappedUI()
+            slappedUI(good: true)
         } else {
             generator.notificationOccurred(.error)
         }
@@ -90,7 +90,7 @@ class ViewController: UIViewController, JHEgyptionDelegate {
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                     self.nextTurn()
                 }
-                delayNextTurn = false
+                //delayNextTurn = false
             } else {
                 nextTurn()
             }
@@ -113,26 +113,39 @@ class ViewController: UIViewController, JHEgyptionDelegate {
     
     //Delegate - Game requests a slap
     internal func clearPile(withDelay: Bool, forPlayer player: JHPlayer) {
+        
+        var good = false
+        if player == game.players[0] {
+            good = true
+        }
+        
         delayNextTurn = true    //Delay next turn
         if withDelay {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                self.slappedUI()
+                self.slappedUI(good: good)
             }
         } else {
-            slappedUI()
+            slappedUI(good: good)
         }
         
-        func vibration() {
-            if player == game.players[0] {
-                generator.notificationOccurred(.success)
-            } else {
-                generator.notificationOccurred(.error)
-            }
+        game.enactTurn()
+        
+    }
+    
+    //Vibration
+    func vibration(good: Bool) {
+        if good {
+            generator.notificationOccurred(.success)
+        } else {
+            //Not users turn so we need to disable the play button
+            enablePlayButton(enabled: false)
+            generator.notificationOccurred(.error)
         }
     }
     
     //Updates UI in case of good slap
-    internal func slappedUI() {
+    internal func slappedUI(good: Bool) {
+        vibration(good: good)
         if uCard.label.isHidden == false {
             uCard.hideCard()
         }

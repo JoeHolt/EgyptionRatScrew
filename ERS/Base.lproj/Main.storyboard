@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,10 +23,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="lW4-Gd-GaV">
-                                <rect key="frame" x="-4" y="574" width="383" height="93"/>
+                                <rect key="frame" x="-4" y="592" width="383" height="75"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgP-FU-kBe">
-                                        <rect key="frame" x="0.0" y="0.0" width="191.5" height="93"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="191.5" height="75"/>
                                         <color key="backgroundColor" red="0.40000000600000002" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Slap">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -36,7 +36,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqt-GW-mx0">
-                                        <rect key="frame" x="191.5" y="0.0" width="191.5" height="93"/>
+                                        <rect key="frame" x="191.5" y="0.0" width="191.5" height="75"/>
                                         <color key="backgroundColor" red="0.0" green="0.84270134230000004" blue="0.25736682049999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Play">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -46,6 +46,9 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="4fP-zW-diT"/>
+                                </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1 cards" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQ6-il-xOG">
                                 <rect key="frame" x="10" y="12" width="355" height="20.5"/>
@@ -83,7 +86,6 @@
                             <constraint firstAttribute="trailing" secondItem="t8b-AH-8ag" secondAttribute="trailing" constant="10" id="4R0-sv-cac"/>
                             <constraint firstItem="6E0-9R-JDQ" firstAttribute="top" secondItem="7RC-Sg-Dzq" secondAttribute="bottom" constant="10" id="HoX-bg-hPt"/>
                             <constraint firstAttribute="trailing" secondItem="6E0-9R-JDQ" secondAttribute="trailing" constant="10" id="Hq3-bQ-lXf"/>
-                            <constraint firstItem="lW4-Gd-GaV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="554" id="JGQ-0x-qTS"/>
                             <constraint firstItem="lW4-Gd-GaV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Jue-UI-2cS"/>
                             <constraint firstItem="SDi-XG-KpV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="OK8-31-lCs"/>
                             <constraint firstAttribute="trailing" secondItem="SDi-XG-KpV" secondAttribute="trailing" constant="10" id="PQr-FL-SPg"/>
